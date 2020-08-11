@@ -1,0 +1,23 @@
+import 'package:flutter/material.dart';
+import 'package:skip/screens/home/home_screen.dart';
+
+class ProfileScreen extends StatefulWidget {
+  @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Text("Profile Screen"),
+      ),
+      body: Container(
+        alignment: Alignment.center,
+        child: Text("Profile Screen"),
+      ),
+    );
+  }
+}
