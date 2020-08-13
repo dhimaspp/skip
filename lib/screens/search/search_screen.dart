@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:skip/screens/home/home_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   @override

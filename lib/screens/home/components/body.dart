@@ -5,16 +5,20 @@ import 'package:skip/screens/home/components/components/second_bar.dart';
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
+    return Column(
+      children: <Widget>[
         Container(
           child: Column(
             children: <Widget>[SecondBar()],
           ),
         ),
-        Divider(),
+        Divider(
+          thickness: 1.0,
+        ),
         Container(
-          child: PostTimeline(),
+          child: Column(
+            children: <Widget>[PostTimeline()],
+          ),
         ),
       ],
     );
