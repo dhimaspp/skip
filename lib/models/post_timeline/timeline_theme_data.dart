@@ -6,7 +6,7 @@ class TimelineThemeData with Diagnosticable {
   TimelineThemeData({
     this.gutterSpacing = 12.0,
     this.itemGap = 24.0,
-    this.lineGap = 2.0,
+    this.lineGap = 5.0,
     this.indent = 5.0,
     this.endIndent = 5.0,
     this.strokeWidth = 4.0,

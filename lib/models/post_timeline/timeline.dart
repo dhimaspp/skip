@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_timeline/event_item.dart';
-import 'package:flutter_timeline/timeline_theme.dart';
-import 'package:flutter_timeline/timeline_theme_data.dart';
+import 'package:skip/models/post_timeline/event_item.dart';
+import 'package:skip/models/post_timeline/flutter_timeline.dart';
+import 'package:skip/models/post_timeline/timeline_theme_data.dart';
 
 class Timeline extends StatelessWidget {
   const Timeline({
@@ -41,9 +41,9 @@ class Timeline extends StatelessWidget {
       separatorBuilder: separatorBuilder ??
           (_, __) => Divider(
                 color: const Color(0xFFB0BEC5),
-                indent: 5.0,
+                indent: 50.0,
                 endIndent: 5.0,
-                thickness: 1.0,
+                thickness: 0.8,
               ),
       physics: physics,
       shrinkWrap: shrinkWrap,
@@ -100,8 +100,6 @@ class Timeline extends StatelessWidget {
         strokeWidth: theme.strokeWidth,
         style: theme.style,
         itemGap: theme.itemGap,
-        indent: theme.indent,
-        endIndent: theme.endIndent,
       ),
 //      size: const Size(double.infinity, double.infinity),
       child: SizedBox(height: double.infinity, width: indicatorSize),
@@ -133,8 +131,6 @@ class _LineIndicatorPainter extends CustomPainter {
     @required this.isFirst,
     @required this.isLast,
     @required this.itemGap,
-    @required this.indent,
-    @required this.endIndent,
   }) : linePaint = Paint()
           ..color = lineColor
           ..strokeCap = strokeCap
@@ -152,8 +148,6 @@ class _LineIndicatorPainter extends CustomPainter {
   final bool isFirst;
   final bool isLast;
   final double itemGap;
-  final double indent;
-  final double endIndent;
 
   @override
   void paint(Canvas canvas, Size size) {

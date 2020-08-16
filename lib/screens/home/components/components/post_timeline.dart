@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:skip/constants.dart';
-import 'package:flutter_timeline/flutter_timeline.dart';
-import 'package:flutter_timeline/timeline.dart';
-import 'package:flutter_timeline/timeline_theme_data.dart';
+import 'package:skip/models/post_timeline/event_item.dart';
+import 'package:skip/models/post_timeline/flutter_timeline.dart';
+import 'package:skip/models/post_timeline/timeline_theme.dart';
+import 'package:skip/skip_tab_Bar.dart';
 
 class PostTimeline extends StatefulWidget {
   @override
@@ -14,12 +15,13 @@ class _PostTimelineState extends State<PostTimeline> {
   void initState() {
     super.initState();
     events = [
-      plainEventDisplay,
+      post,
       TimelineEventDisplay(
           child: Card(
         child: TimelineEventCard(
-          title: Text("click the + button"),
-          content: Text("to add a new event item"),
+          time: Text("33 min ago"),
+          userName: Text("Lita"),
+          activities: Text("Makan di Fortune Cafe juga"),
         ),
       )),
     ];
@@ -30,11 +32,12 @@ class _PostTimelineState extends State<PostTimeline> {
     return _buildTimeline();
   }
 
-  TimelineEventDisplay get plainEventDisplay {
+  TimelineEventDisplay get post {
     return TimelineEventDisplay(
         child: TimelineEventCard(
-          title: Text("just now"),
-          content: Text("Datang ke Resto jam ${DateTime.now()}"),
+          time: Text("23 min ago"),
+          userName: Text("Dhimaspp"),
+          activities: Text("Makan di Fortune Cafe"),
         ),
         indicator: TimelineDots.of(context).circleIcon);
   }
@@ -43,10 +46,20 @@ class _PostTimelineState extends State<PostTimeline> {
 
   Widget _buildTimeline() {
     return TimelineTheme(
-        data: TimelineThemeData(lineColor: Colors.blueAccent),
+        data: TimelineThemeData(),
         child: Timeline(
           indicatorSize: 56,
           events: events,
         ));
+  }
+
+  void addEvent() {
+    setState(() {
+      events.add(post);
+    });
+  }
+
+  Widget tai() {
+    return SkipTabBar(addEventCallback: addEvent);
   }
 }

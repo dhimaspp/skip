@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      // ignore: missing_required_param
       home: SkipTabBar(),
     );
   }

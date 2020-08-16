@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_timeline/timeline_theme_data.dart';
+import 'package:skip/models/post_timeline/timeline_theme_data.dart';
 
 /// Controls the default color, opacity, and size of timeline in a widget subtree.
 /// The timeline theme is honored by [Timeline] widgets.

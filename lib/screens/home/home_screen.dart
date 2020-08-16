@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:skip/constants.dart';
 import 'package:skip/screens/home/components/body.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,13 +19,23 @@ class _HomeScreenState extends State<HomeScreen> {
         child: AppBar(
           backgroundColor: Colors.white,
           elevation: 2,
-          title: Container(
-            margin: EdgeInsets.only(left: 5),
+          leading: Container(
+            margin: EdgeInsets.only(left: 5, bottom: 5, right: 0),
             child: SvgPicture.asset(
               "assets/icons/skip-logo.svg",
             ),
           ),
           centerTitle: false,
+          title: new Text(
+            "Skip",
+            style: TextStyle(
+              fontFamily: "Ambit",
+              fontSize: 24,
+              fontWeight: FontWeight.w300,
+              color: kMaincolor,
+              letterSpacing: -1,
+            ),
+          ),
           actions: [
             Container(
               height: 33,

@@ -80,12 +80,6 @@
       "languageVersion": "2.2"
     },
     {
-      "name": "flutter_timeline",
-      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_timeline-0.0.4+1",
-      "packageUri": "lib/",
-      "languageVersion": "2.7"
-    },
-    {
       "name": "get",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/get-3.4.2",
       "packageUri": "lib/",
@@ -194,7 +188,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2020-08-13T20:12:24.006653Z",
+  "generated": "2020-08-15T19:42:43.540776Z",
   "generator": "pub",
   "generatorVersion": "2.9.0"
 }

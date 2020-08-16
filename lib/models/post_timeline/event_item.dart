@@ -18,10 +18,14 @@ class TimelineEventDisplay {
 }
 
 class TimelineEventCard extends StatelessWidget {
-  final Widget title;
-  final Widget content;
+  final Widget time;
+  final Widget userName;
+  final Widget activities;
 
-  TimelineEventCard({@required this.title, @required this.content});
+  TimelineEventCard(
+      {@required this.time,
+      @required this.userName,
+      @required this.activities});
 
   @override
   Widget build(BuildContext context) {
@@ -38,29 +42,51 @@ class TimelineEventCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _time(context), //TODO: make result like "5 minute ago"
-            _title(context),
+            Row(
+              children: [
+                _userName(context),
+                _time(context),
+              ],
+            ),
             SizedBox(
               height: 8,
             ),
-            _description(context),
+            _activities(context),
           ],
         ));
   }
 
   Widget _time(BuildContext context) {
-    return DefaultTextStyle(
-        style: Theme.of(context).textTheme.subtitle1, child: title);
+    return Padding(
+      padding: const EdgeInsets.only(left: 5),
+      child: DefaultTextStyle(
+          style: TextStyle(
+              fontFamily: "Ambit",
+              fontSize: 10,
+              fontWeight: FontWeight.w600,
+              color: Colors.grey),
+          child: time),
+    );
   }
 
-  Widget _title(BuildContext context) {
+  Widget _userName(BuildContext context) {
     return DefaultTextStyle(
-        style: Theme.of(context).textTheme.subtitle1, child: title);
+        style: TextStyle(
+            fontFamily: "Ambit",
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+            color: Colors.black),
+        child: userName);
   }
 
-  Widget _description(BuildContext context) {
+  Widget _activities(BuildContext context) {
     return DefaultTextStyle(
-        style: Theme.of(context).textTheme.overline, child: content);
+        style: TextStyle(
+            fontFamily: "Ambit",
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            color: Colors.black),
+        child: activities);
   }
 }
 

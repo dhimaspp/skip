@@ -8,8 +8,10 @@ import 'package:skip/screens/search/search_screen.dart';
 import 'package:skip/screens/skip/skip_screen.dart';
 
 class SkipTabBar extends StatefulWidget {
-  SkipTabBar({Key key, this.title}) : super(key: key);
-  final String title;
+  final _callback;
+
+  SkipTabBar({@required void addEventCallback()})
+      : _callback = addEventCallback;
 
   @override
   _SkipTabBarState createState() => _SkipTabBarState();
@@ -18,6 +20,7 @@ class SkipTabBar extends StatefulWidget {
 class _SkipTabBarState extends State<SkipTabBar>
     with SingleTickerProviderStateMixin {
   List<Widget> screens = [
+    // ignore: missing_required_param
     HomeScreen(),
     SearchScreen(),
     SkipScreen(),
@@ -33,6 +36,18 @@ class _SkipTabBarState extends State<SkipTabBar>
         body: TabBarView(
           children: screens,
         ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: kMaincolor.withOpacity(0.8),
+          elevation: 0.0,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(45))),
+          onPressed: () {
+            widget?._callback();
+          },
+          tooltip: 'add new event',
+          child: Icon(Icons.add),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
         bottomNavigationBar: Container(
           height: 42,
           decoration: BoxDecoration(color: Colors.white, boxShadow: [
