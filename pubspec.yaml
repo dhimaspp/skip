@@ -18,6 +18,8 @@ dependencies:
   cupertino_icons: ^0.1.3
   #Help us to use SVG in our  app
   animations: ^1.1.0 #Help us to use animation easily also develop by flutter team
+  firebase_auth: ^0.18.0+1
+  cloud_firestore: ^0.14.0+1
 
 dev_dependencies:
   flutter_test:
