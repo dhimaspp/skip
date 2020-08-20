@@ -16,11 +16,12 @@ class TimelineDots {
 
   Widget get circleIcon {
     return Container(
-      width: 24,
-      height: 24,
+      width: 12,
+      height: 12,
       child: Icon(
         Icons.event,
         color: Colors.white,
+        size: 20,
       ),
       decoration: BoxDecoration(
           color: kMaincolor,

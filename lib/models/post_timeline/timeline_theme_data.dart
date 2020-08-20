@@ -4,17 +4,17 @@ import 'package:flutter/material.dart';
 @immutable
 class TimelineThemeData with Diagnosticable {
   TimelineThemeData({
-    this.gutterSpacing = 12.0,
-    this.itemGap = 24.0,
-    this.lineGap = 5.0,
-    this.indent = 5.0,
-    this.endIndent = 5.0,
-    this.strokeWidth = 4.0,
+    this.gutterSpacing = 5.0,
+    this.itemGap = 10.0,
+    this.lineGap = -6.0,
+    this.indent = 2.0,
+    this.endIndent = 2.0,
+    this.strokeWidth = 2.0,
     this.strokeCap = StrokeCap.butt,
     this.lineColor = const Color(0xFFB0BEC5),
     this.style = PaintingStyle.stroke,
   })  : assert(itemGap >= 0),
-        assert(lineGap >= 2.0);
+        assert(lineGap <= 2);
 
   final Color lineColor;
   final double lineGap;
@@ -35,14 +35,13 @@ class TimelineThemeData with Diagnosticable {
   const TimelineThemeData.fallback()
       : lineColor = const Color(0xFFB0BEC5),
         lineGap = 2.0,
+        indent = 2.0,
+        endIndent = 2.0,
         strokeCap = StrokeCap.butt,
         strokeWidth = 4.0,
         style = PaintingStyle.stroke,
         itemGap = 24.0,
-        gutterSpacing = 12.0,
-        indent = 5.0,
-        endIndent = 5.0;
-
+        gutterSpacing = 12.0;
 //      : color = const Color(0xFF000000),
 //        _opacity = 1.0,
 //        size = 24.0;

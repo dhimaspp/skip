@@ -29,7 +29,19 @@ class _PostTimelineState extends State<PostTimeline> {
 
   @override
   Widget build(BuildContext context) {
-    return _buildTimeline();
+    return Scaffold(
+      body: _buildTimeline(),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: kMaincolor.withOpacity(0.8),
+        elevation: 0.0,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(45))),
+        onPressed: _addEvent,
+        tooltip: 'add new event',
+        child: Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
+    );
   }
 
   TimelineEventDisplay get post {
@@ -53,13 +65,9 @@ class _PostTimelineState extends State<PostTimeline> {
         ));
   }
 
-  void addEvent() {
+  void _addEvent() {
     setState(() {
       events.add(post);
     });
-  }
-
-  Widget tai() {
-    return SkipTabBar(addEventCallback: addEvent);
   }
 }

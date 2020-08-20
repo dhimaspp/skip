@@ -38,13 +38,12 @@ class Timeline extends StatelessWidget {
 
     return ListView.separated(
       padding: padding,
-      separatorBuilder: separatorBuilder ??
-          (_, __) => Divider(
-                color: const Color(0xFFB0BEC5),
-                indent: 50.0,
-                endIndent: 5.0,
-                thickness: 0.8,
-              ),
+      separatorBuilder: (context, index) => Divider(
+        color: const Color(0xFFB0BEC5),
+        indent: 50.0,
+        endIndent: 5.0,
+        thickness: 0.8,
+      ),
       physics: physics,
       shrinkWrap: shrinkWrap,
       itemCount: itemCount,
@@ -96,6 +95,8 @@ class Timeline extends StatelessWidget {
         isFirst: isFirst,
         isLast: isLast,
         lineGap: theme.lineGap,
+        indent: theme.indent,
+        endIndent: theme.endIndent,
         strokeCap: theme.strokeCap,
         strokeWidth: theme.strokeWidth,
         style: theme.style,
@@ -124,6 +125,8 @@ class _LineIndicatorPainter extends CustomPainter {
     @required this.hideDefaultIndicator,
     @required this.indicatorSize,
     @required this.lineGap,
+    @required this.indent,
+    @required this.endIndent,
     @required this.strokeCap,
     @required this.strokeWidth,
     @required this.style,
@@ -140,6 +143,8 @@ class _LineIndicatorPainter extends CustomPainter {
   final bool hideDefaultIndicator;
   final double indicatorSize;
   final double lineGap;
+  final double indent;
+  final double endIndent;
   final StrokeCap strokeCap;
   final double strokeWidth;
   final PaintingStyle style;
@@ -152,15 +157,15 @@ class _LineIndicatorPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final indicatorRadius = indicatorSize / 2;
-    final indicatorMargin = indicatorRadius + lineGap;
-    final safeItemGap = indicatorMargin + 0.0;
+    final indicatorMargin = indicatorRadius - lineGap;
+    final safeItemGap = indicatorMargin + -20.0;
 
-    final top = size.topLeft(Offset(indicatorRadius, 0.0 - safeItemGap));
+    final top = size.topLeft(Offset(indicatorRadius, -.0 - safeItemGap));
     final centerTop = size.centerLeft(
       Offset(indicatorRadius, -indicatorMargin),
     );
 
-    final bottom = size.bottomLeft(Offset(indicatorRadius, 0.0 + safeItemGap));
+    final bottom = size.bottomLeft(Offset(indicatorRadius, -3.0 + safeItemGap));
     final centerBottom = size.centerLeft(
       Offset(indicatorRadius, indicatorMargin),
     );

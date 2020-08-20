@@ -8,17 +8,13 @@ class Body extends StatelessWidget {
     return Column(
       children: <Widget>[
         Container(
-          child: Column(
-            children: <Widget>[SecondBar()],
-          ),
+          child: SecondBar(),
         ),
         Divider(
           thickness: 1.0,
         ),
-        Container(
-          child: Column(
-            children: <Widget>[PostTimeline()],
-          ),
+        Expanded(
+          child: PostTimeline(),
         ),
       ],
     );

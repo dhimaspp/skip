@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1067249375756",
+    "firebase_url": "https://skip-aplikasi.firebaseio.com",
+    "project_id": "skip-aplikasi",
+    "storage_bucket": "skip-aplikasi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1067249375756:android:e32379f60f9a9abe7aec29",
+        "android_client_info": {
+          "package_name": "com.atasbumi.skip"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1067249375756-b5hrvph6actkmqi5de0bms2275sv8lu7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAElwTJ_bRFQ6J1oBSjuKm1JHcE3brTM8g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1067249375756-b5hrvph6actkmqi5de0bms2275sv8lu7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

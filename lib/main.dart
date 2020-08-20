@@ -15,6 +15,22 @@ class MyApp extends StatelessWidget {
       title: 'Skip App',
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        textTheme: TextTheme(
+            subtitle1: TextStyle(
+                fontFamily: "Ambit",
+                fontSize: 10,
+                fontWeight: FontWeight.w600,
+                color: Colors.grey),
+            subtitle2: TextStyle(
+                fontFamily: "Ambit",
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                color: Colors.black),
+            caption: TextStyle(
+                fontFamily: "Ambit",
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: Colors.black)),
       ),
       // ignore: missing_required_param
       home: SkipTabBar(),

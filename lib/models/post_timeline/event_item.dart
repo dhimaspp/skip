@@ -38,7 +38,7 @@ class TimelineEventCard extends StatelessWidget {
 
   Widget _buildBody(BuildContext context) {
     return Container(
-        padding: EdgeInsets.only(left: 10, top: 12, right: 16, bottom: 15),
+        padding: EdgeInsets.only(left: 10, top: 8, right: 16, bottom: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -49,7 +49,7 @@ class TimelineEventCard extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 8,
+              height: 3,
             ),
             _activities(context),
           ],
@@ -60,46 +60,31 @@ class TimelineEventCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 5),
       child: DefaultTextStyle(
-          style: TextStyle(
-              fontFamily: "Ambit",
-              fontSize: 10,
-              fontWeight: FontWeight.w600,
-              color: Colors.grey),
-          child: time),
+          style: Theme.of(context).textTheme.subtitle1, child: time),
     );
   }
 
   Widget _userName(BuildContext context) {
     return DefaultTextStyle(
-        style: TextStyle(
-            fontFamily: "Ambit",
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
-            color: Colors.black),
-        child: userName);
+        style: Theme.of(context).textTheme.subtitle2, child: userName);
   }
 
   Widget _activities(BuildContext context) {
     return DefaultTextStyle(
-        style: TextStyle(
-            fontFamily: "Ambit",
-            fontSize: 12,
-            fontWeight: FontWeight.w600,
-            color: Colors.black),
-        child: activities);
+        style: Theme.of(context).textTheme.caption, child: activities);
   }
 }
 
 class TimelineSectionDivider extends StatelessWidget {
-  final Widget content;
+  final Widget time;
 
   factory TimelineSectionDivider.byDate(DateTime date) {
     return TimelineSectionDivider(
-      content: Text("$date"),
+      time: Text("$date"),
     );
   }
 
-  const TimelineSectionDivider({Key key, @required this.content})
+  const TimelineSectionDivider({Key key, @required this.time})
       : super(key: key);
 
   @override
@@ -109,8 +94,8 @@ class TimelineSectionDivider extends StatelessWidget {
 
   Widget _content(BuildContext context) {
     return AnimatedDefaultTextStyle(
-        child: content,
-        style: Theme.of(context).textTheme.headline5,
+        child: time,
+        style: Theme.of(context).textTheme.subtitle1,
         duration: kThemeChangeDuration);
   }
 }
