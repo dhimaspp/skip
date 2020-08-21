@@ -7,7 +7,6 @@ class SecondBar extends StatefulWidget {
   _SecondBarState createState() => _SecondBarState();
 }
 
-// TODO Cari referensi design second bar yang bagus
 class _SecondBarState extends State<SecondBar> {
   List<bool> isSelected = [false, false, false];
 

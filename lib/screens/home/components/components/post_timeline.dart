@@ -3,7 +3,6 @@ import 'package:skip/constants.dart';
 import 'package:skip/models/post_timeline/event_item.dart';
 import 'package:skip/models/post_timeline/flutter_timeline.dart';
 import 'package:skip/models/post_timeline/timeline_theme.dart';
-import 'package:skip/skip_tab_Bar.dart';
 
 class PostTimeline extends StatefulWidget {
   @override
