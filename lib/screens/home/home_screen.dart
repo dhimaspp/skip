@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           centerTitle: false,
           title: new Text(
-            "Skip",
+            "Skip.",
             style: TextStyle(
               fontFamily: "Ambit",
               fontSize: 24,
