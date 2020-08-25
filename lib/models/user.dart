@@ -1,4 +1,4 @@
-class Users {
-  final String uid;
-  Users({this.uid});
+class StatusLogin {
+  final String success;
+  StatusLogin({this.success});
 }

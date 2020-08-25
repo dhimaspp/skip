@@ -21,9 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
           elevation: 2,
           leading: Container(
             margin: EdgeInsets.only(left: 5, bottom: 5, right: 0),
-            child: SvgPicture.asset(
-              "assets/icons/skip-logo.svg",
-            ),
+            child: SvgPicture.asset("assets/icons/skip-logo.svg"),
           ),
           centerTitle: false,
           title: new Text(

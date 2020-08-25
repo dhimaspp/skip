@@ -6,6 +6,7 @@ import 'package:skip/constants.dart';
 import 'package:skip/models/user.dart';
 import 'package:skip/screens/wrapper.dart';
 import 'package:skip/services/auth.dart';
+import 'package:skip/services/exception_handler.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,9 +18,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<Users>.value(
-      value: AuthService().streamUser,
-      child: GetMaterialApp(
+    return StreamProvider<AuthResultStatus>.value(
+      value: AuthService().streamStatus,
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Skip App',
         theme: ThemeData(

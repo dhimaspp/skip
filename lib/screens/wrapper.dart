@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:skip/models/user.dart';
-import 'package:skip/screens/authenticate/authenticate.dart';
+import 'package:skip/screens/authenticate/loginScreen.dart';
+import 'package:skip/services/exception_handler.dart';
 import 'package:skip/skip_tab_Bar.dart';
 
 class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<Users>(context);
-    print(user);
+    final status = Provider.of<AuthResultStatus>(context);
+    print(status);
 
     //return either home or authenticate widget
-    if (user == null) {
-      return Authenticate();
+    if (status != AuthResultStatus.successful) {
+      return LoginScreen();
     } else {
       return SkipTabBar();
     }

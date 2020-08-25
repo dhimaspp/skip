@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:skip/screens/authenticate/resetPassword.dart';
 import 'package:skip/services/auth.dart';
+import 'package:skip/services/exception_handler.dart';
 
 import '../../constants.dart';
 
@@ -10,30 +13,55 @@ class LoginTab extends StatefulWidget {
 
 class _LoginTabState extends State<LoginTab> {
   final AuthService _auth = AuthService();
-  final _formKey = GlobalKey<FormState>();
-
   //text field state
-  String email = "";
-  String password = "";
+  String email;
+  String password;
   String error = "";
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 60),
       child: Form(
-        key: _formKey,
         child: Container(
           alignment: Alignment.center,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              SizedBox(height: 12),
+              Text(
+                error,
+                style: TextStyle(color: Colors.red, fontSize: 14.0),
+              ),
               TextFormField(
+                decoration: textInputDecoration.copyWith(
+                    hintText: "Email",
+                    suffixIcon: Icon(
+                      Icons.email,
+                      color: kMaincolor,
+                    )),
+                style: Theme.of(context)
+                    .textTheme
+                    .caption
+                    .copyWith(fontSize: 18, color: kMaincolor),
+                textAlignVertical: TextAlignVertical.bottom,
                 validator: (val) => val.isEmpty ? "Masukan email kamu" : null,
                 onChanged: (val) {
                   setState(() => email = val);
                 },
               ),
               TextFormField(
+                decoration: textInputDecoration.copyWith(
+                    hintText: "Password",
+                    suffixIcon: Icon(
+                      Icons.lock,
+                      color: kMaincolor,
+                    )),
+                style: Theme.of(context)
+                    .textTheme
+                    .caption
+                    .copyWith(fontSize: 18, color: kMaincolor),
+                textAlignVertical: TextAlignVertical.bottom,
                 validator: (val) =>
                     val.length < 6 ? "Password harus 6+ karakter " : null,
                 onChanged: (val) {
@@ -47,24 +75,57 @@ class _LoginTabState extends State<LoginTab> {
                     color: kMaincolor.withOpacity(0.5),
                     child: Text(
                       "Login",
-                      style: TextStyle(color: Colors.white),
+                      style: Theme.of(context)
+                          .textTheme
+                          .caption
+                          .copyWith(color: Colors.white, fontSize: 15),
                     ),
                     onPressed: () async {
-                      if (_formKey.currentState.validate()) {
-                        dynamic result = await _auth.loginWithEmailAndPassword(
-                            email, password);
-                        if (result == null) {
-                          setState(() => error =
-                              "Email / password yang anda masukan salah");
-                        }
+                      final status = await _auth.loginWithEmailAndPassword(
+                          email, password);
+                      if (status != AuthResultStatus.successful) {
+                        setState(() {
+                          error = AuthExceptionHandler.generateExceptionMessage(
+                              status);
+                        });
                       }
                     }),
               ),
-              SizedBox(height: 12),
-              Text(
-                error,
-                style: TextStyle(color: Colors.red, fontSize: 14.0),
+              FlatButton(
+                child: Text("Lupa password?"),
+                onPressed: null,
               ),
+              Text("Atau"),
+              SizedBox(height: 20),
+              OutlineButton(
+                onPressed: null,
+                splashColor: Colors.grey,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(40)),
+                highlightElevation: 0,
+                borderSide: BorderSide(color: Colors.grey),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      SvgPicture.asset("assets/icons/Google__G__Logo.svg",
+                          height: 35),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Text(
+                          "Login dengan Google",
+                          style: Theme.of(context)
+                              .textTheme
+                              .caption
+                              .copyWith(fontSize: 15),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
         ),
