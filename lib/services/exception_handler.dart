@@ -9,7 +9,8 @@ enum AuthResultStatus {
   tooManyRequests,
   undefined,
   phoneAlreadyExist,
-  weakPassword
+  weakPassword,
+  kosong,
 }
 
 class AuthExceptionHandler {
@@ -23,7 +24,7 @@ class AuthExceptionHandler {
       case "weak-password":
         status = AuthResultStatus.weakPassword;
         break;
-      case "invalid-password":
+      case "wrong-password":
         status = AuthResultStatus.wrongPassword;
         break;
       case "phone-number-already-exists":

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:skip/models/loading.dart';
 import 'package:skip/screens/authenticate/resetPassword.dart';
 import 'package:skip/services/auth.dart';
 import 'package:skip/services/exception_handler.dart';
@@ -13,9 +15,10 @@ class LoginTab extends StatefulWidget {
 
 class _LoginTabState extends State<LoginTab> {
   final AuthService _auth = AuthService();
+  bool loading = false;
   //text field state
-  String email;
-  String password;
+  String email = "";
+  String password = "";
   String error = "";
 
   @override
@@ -28,6 +31,7 @@ class _LoginTabState extends State<LoginTab> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              loading ? _loading() : SizedBox(height: 50),
               SizedBox(height: 12),
               Text(
                 error,
@@ -72,7 +76,7 @@ class _LoginTabState extends State<LoginTab> {
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),
                 child: RaisedButton(
-                    color: kMaincolor.withOpacity(0.5),
+                    color: kMaincolor,
                     child: Text(
                       "Login",
                       style: Theme.of(context)
@@ -81,24 +85,37 @@ class _LoginTabState extends State<LoginTab> {
                           .copyWith(color: Colors.white, fontSize: 15),
                     ),
                     onPressed: () async {
-                      final status = await _auth.loginWithEmailAndPassword(
-                          email, password);
-                      if (status != AuthResultStatus.successful) {
-                        setState(() {
-                          error = AuthExceptionHandler.generateExceptionMessage(
-                              status);
-                        });
+                      {
+                        setState(() => loading = true);
+                        final status = await _auth.loginWithEmailAndPassword(
+                            email, password);
+                        if (status != AuthResultStatus.successful) {
+                          setState(() {
+                            error =
+                                AuthExceptionHandler.generateExceptionMessage(
+                                    status);
+                            loading = false;
+                          });
+                        }
                       }
                     }),
               ),
               FlatButton(
                 child: Text("Lupa password?"),
-                onPressed: null,
+                onPressed: () {
+                  setState(() {
+                    _resetAlert();
+                  });
+                },
               ),
               Text("Atau"),
               SizedBox(height: 20),
               OutlineButton(
-                onPressed: null,
+                onPressed: () {
+                  _auth
+                      .loginWithGoogle()
+                      .whenComplete(() => AuthResultStatus.successful);
+                },
                 splashColor: Colors.grey,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(40)),
@@ -131,5 +148,51 @@ class _LoginTabState extends State<LoginTab> {
         ),
       ),
     );
+  }
+
+  Widget _loading() {
+    return SpinKitPulse(
+      color: kSecondaryColor,
+      size: 50,
+    );
+  }
+
+  Future _resetAlert() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: new Text("Reset Password"),
+            content:
+                new Text("Apakah anda yakin ingin melanjutkan reset password?"),
+            actions: <Widget>[
+              FlatButton(
+                  color: Colors.transparent,
+                  child: Text(
+                    "Lanjut",
+                    style: Theme.of(context)
+                        .textTheme
+                        .caption
+                        .copyWith(color: kMaincolor, fontSize: 15),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  }),
+              FlatButton(
+                  color: Colors.transparent,
+                  splashColor: kSecondaryColor,
+                  child: Text(
+                    "Batal",
+                    style: Theme.of(context)
+                        .textTheme
+                        .caption
+                        .copyWith(color: kMaincolor, fontSize: 15),
+                  ),
+                  onPressed: () async {
+                    Navigator.of(context).pop();
+                  }),
+            ],
+          );
+        });
   }
 }

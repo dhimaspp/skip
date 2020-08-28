@@ -35,10 +35,10 @@ class AuthService {
   }
 
   //sign in email/password method
-  Future loginWithEmailAndPassword(email, password) async {
+  Future loginWithEmailAndPassword(String email, String password) async {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(
-          email: email.trim(), password: password.trim());
+          email: email, password: password);
       User user = result.user;
       if (result.user != null) {
         _status = AuthResultStatus.successful;
@@ -54,7 +54,7 @@ class AuthService {
   }
 
   //register im email/password method
-  Future registerWithEmailAndPassword(email, password) async {
+  Future registerWithEmailAndPassword(String email, String password) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email.trim(), password: password.trim());
@@ -72,9 +72,14 @@ class AuthService {
     return _status;
   }
 
-  //Reset password
-  Future<void> sendPasswordResetEmail(String email) async {
+  //Reset password base on email Request
+  Future<void> sendPasswordResetEmailReq(String email) async {
     return _auth.sendPasswordResetEmail(email: email);
+  }
+
+  //Recover password
+  Future resetPasswort(String password) async {
+    return await _auth.confirmPasswordReset();
   }
 
   //sign out method

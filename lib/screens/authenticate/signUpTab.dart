@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:skip/services/auth.dart';
 import 'package:skip/services/exception_handler.dart';
 
@@ -11,10 +12,11 @@ class SignUpTab extends StatefulWidget {
 
 class _SignUpTabState extends State<SignUpTab> {
   final AuthService _auth = AuthService();
-
+  bool loading = false;
   //text field state
   String email;
   String password;
+  String confirmPassword;
   String error = " ";
 
   @override
@@ -27,6 +29,7 @@ class _SignUpTabState extends State<SignUpTab> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              loading ? _loading() : SizedBox(height: 50),
               SizedBox(height: 12),
               Text(
                 error,
@@ -68,22 +71,55 @@ class _SignUpTabState extends State<SignUpTab> {
                 },
                 obscureText: true,
               ),
+              TextFormField(
+                decoration: textInputDecoration.copyWith(
+                    hintText: "Konfirmasi Password",
+                    suffixIcon: Icon(
+                      Icons.lock,
+                      color: kMaincolor,
+                    )),
+                style: Theme.of(context)
+                    .textTheme
+                    .caption
+                    .copyWith(fontSize: 18, color: kMaincolor),
+                textAlignVertical: TextAlignVertical.bottom,
+                validator: (val) {
+                  if (val != password) return "Password tidak cocok";
+                  return null;
+                },
+                onChanged: (val) {
+                  setState(() => confirmPassword = val);
+                },
+                obscureText: true,
+              ),
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),
                 child: RaisedButton(
-                    color: kMaincolor.withOpacity(0.5),
+                    color: kMaincolor,
                     child: Text(
                       "Daftar",
                       style: TextStyle(color: Colors.white),
                     ),
                     onPressed: () async {
-                      final status = await _auth.registerWithEmailAndPassword(
-                          email, password);
-                      if (status != AuthResultStatus.successful) {
-                        setState(() {
-                          error = AuthExceptionHandler.generateExceptionMessage(
-                              status);
-                        });
+                      {
+                        setState(() => loading = true);
+                        if (password != confirmPassword) {
+                          setState(() {
+                            error = "Konfirmasi password tidak cocok";
+                            loading = false;
+                          });
+                        } else {
+                          final status = await _auth
+                              .registerWithEmailAndPassword(email, password);
+                          if (status != AuthResultStatus.successful) {
+                            setState(() {
+                              error =
+                                  AuthExceptionHandler.generateExceptionMessage(
+                                      status);
+                              loading = false;
+                            });
+                          }
+                        }
                       }
                     }),
               ),
@@ -91,6 +127,13 @@ class _SignUpTabState extends State<SignUpTab> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _loading() {
+    return SpinKitPulse(
+      color: kSecondaryColor,
+      size: 50,
     );
   }
 }

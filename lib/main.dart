@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Skip App',
         theme: ThemeData(
+          primaryColor: kMaincolor,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           textTheme: TextTheme(
               subtitle1: TextStyle(

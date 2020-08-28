@@ -16,7 +16,7 @@ class _ResetPasswordState extends State<ResetPassword> {
   String password;
   String error = "";
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext konteks) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SizedBox(
@@ -109,7 +109,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                               style: TextStyle(color: Colors.white),
                             ),
                             onPressed: () async {
-                              await _auth.sendPasswordResetEmail(password);
+                              await _auth.sendPasswordResetEmailReq(password);
                             }),
                       ),
                     ],
